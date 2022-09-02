@@ -1,0 +1,11 @@
+rep 10:
+    ipush add
+end
+ipop
+
+rep 10:
+    vpop
+    exec
+end
+
+print
