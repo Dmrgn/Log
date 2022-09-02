@@ -10,7 +10,13 @@
 
 # LOG
 
-log is a simplistic interpreted stack-based programming language.
+log is an esoteric interpreted stack-based programming language.
+
+Here is the hello world program:
+```log
+vpush 'all your codebase are belong to us.'
+print
+```
 
 ## Change LOG
 
