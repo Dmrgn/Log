@@ -1,11 +1,21 @@
-# contains functions for turning source code into
-# computer readable, generalized tokens
 defmodule Lexer do
+  @moduledoc """
+  Parser for `LOG` language of gods.
+  Contains functions for turning source code into
+  computer readable, generalized tokens
+  """
 
-  # creates a subsection string of 'mess' which includes
-  # every element until the first appearance of 'stopper'
-  # returns the subsection as a string as well as the
-  # remaining elements in 'mess'
+  @doc """
+  Creates a subsection string of 'mess' which includes
+  every element until the first appearance of 'stopper'
+
+  Returns the subsection as a string as well as the
+  remaining elements in 'mess'
+
+  ## Example
+    iex> Lexer.scan_until(["m","y"," ","d","a","n","i","e","l"], "d")
+    {" ym", ["a","n","i","e","l"]}
+  """
   def scan_until(mess, stopper) do
     index_of_break = mess |> Enum.find_index(fn x ->
       x === stopper
@@ -22,8 +32,18 @@ defmodule Lexer do
     end}
   end
 
-  # if the passed string representation of a token is not parsable
-  # as a float then return false, otherwise return it as a float
+
+  @doc """
+  If the passed string representation of a token is not parsable
+  as a float then return false, otherwise return it as a float
+
+  ## Example
+    iex> Lexer.token_is_float?("1.dda")
+    false
+
+    iex> Lexer.token_is_float?("1.0")
+    1.0
+  """
   def token_is_float?(token) do
     try do
       {as_float, excess} = Float.parse(token)
@@ -37,8 +57,14 @@ defmodule Lexer do
     end
   end
 
-  # returns the type of the passed string representation
-  # of a token (:string, :number or :command)
+  @doc """
+  Returns the type of the passed string representation
+  of a token (:string, :number or :command)
+
+  ## Example
+    iex> Lexer.type_of_token("'this is a string'")
+    :string
+  """
   def type_of_token(token) do
     cond do
       # :strings start and end with '
@@ -53,7 +79,13 @@ defmodule Lexer do
     end
   end
 
-  # recursively converts the passed string 'raw' into lexed tokens
+  @doc """
+  Recursively converts the passed string 'raw' into lexed tokens
+
+  ## Example
+    iex> IO.inspect(Lexer.lex([],[],"vpush "))
+    [%{type: :command, value: "vpush"}]
+  """
   def lex(lexed, stack, raw) do
     if String.length(raw) > 0 do
       cur_char = raw |> String.first()

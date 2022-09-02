@@ -1,6 +1,8 @@
 defmodule LogTest do
   use ExUnit.Case
 
+  doctest Lexer
+
   test "Lexes command and number" do
     lexed = Lexer.lex([], [], "vpush 10\n")
     assert lexed === [

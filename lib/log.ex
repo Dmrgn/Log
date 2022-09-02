@@ -1,28 +1,31 @@
 defmodule Log do
   @moduledoc """
-  Documentation for `Log` the language of gods.
+  Documentation for `LOG` language of gods.
   """
 
-  # @doc """
-  # Hello world.
+  @doc """
+  Runs a LOG program passed from the command line as a file.
+  """
 
   # ## Examples
 
   #     iex> Log.main("test")
   #     ["test"]
 
-  # """
 
   def main(args) do
     [file | _options] = args
-    # read in example file
-    IO.puts("Reading file " <> file)
+
+    IO.inspect(Lexer.lex([],[],"vpush "))
     try do
       file_data = File.read!(file) <> "\n"
       IO.puts("file_data is: " <> file_data)
-      result = Lexer.lex([], [], file_data)
+      lexed = Lexer.lex([], [], file_data)
       IO.puts("Result of lex is:")
-      IO.inspect(result)
+      IO.inspect(lexed)
+      parsed = Parser.parse(lexed);
+      IO.puts("Result of parse is:")
+      IO.inspect(parsed)
     rescue
       e -> IO.inspect(e)
     end
