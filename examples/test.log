@@ -1,2 +1,2 @@
-vpush 'test' 10 'test2' thats cool
-vpush 10
+ipush 10
+ipush test

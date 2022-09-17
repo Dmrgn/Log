@@ -16,16 +16,15 @@ defmodule Log do
   def main(args) do
     [file | _options] = args
 
-    IO.inspect(Lexer.lex([],[],"vpush "))
     try do
       file_data = File.read!(file) <> "\n"
-      IO.puts("file_data is: " <> file_data)
+      # IO.puts("file_data is: " <> file_data)
       lexed = Lexer.lex([], [], file_data)
-      IO.puts("Result of lex is:")
-      IO.inspect(lexed)
-      parsed = Parser.parse(lexed);
-      IO.puts("Result of parse is:")
-      IO.inspect(parsed)
+      # IO.puts("Result of lex is:")
+      # IO.inspect(lexed)
+      parsed = Parser.parse([], [], lexed, 1);
+      # IO.puts("Result of parse is:")
+      # IO.inspect(parsed)
     rescue
       e -> IO.inspect(e)
     end

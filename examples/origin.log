@@ -1,11 +1,2 @@
-rep 10:
-    ipush add
-end
-ipop
-
-rep 10:
-    vpop
-    exec
-end
-
+vpush 'hmm this is a test'
 print

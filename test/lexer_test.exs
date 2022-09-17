@@ -1,4 +1,4 @@
-defmodule LogTest do
+defmodule LexerTest do
   use ExUnit.Case
 
   doctest Lexer

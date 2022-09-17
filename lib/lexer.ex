@@ -32,31 +32,6 @@ defmodule Lexer do
     end}
   end
 
-
-  @doc """
-  If the passed string representation of a token is not parsable
-  as a float then return false, otherwise return it as a float
-
-  ## Example
-    iex> Lexer.token_is_float?("1.dda")
-    false
-
-    iex> Lexer.token_is_float?("1.0")
-    1.0
-  """
-  def token_is_float?(token) do
-    try do
-      {as_float, excess} = Float.parse(token)
-      if (String.length(excess) === 0) do
-        as_float
-      else
-        false
-      end
-    rescue
-      _e -> false
-    end
-  end
-
   @doc """
   Returns the type of the passed string representation
   of a token (:string, :number or :command)
@@ -71,7 +46,7 @@ defmodule Lexer do
       String.starts_with?(token, "'") && String.ends_with?(token, "'") ->
         :string
       # :numbers contain only 0-9 or .
-      token_is_float?(token) ->
+      Util.string_is_float?(token) ->
         :number
       # :commands contain anything else
       true ->
@@ -89,7 +64,6 @@ defmodule Lexer do
   def lex(lexed, stack, raw) do
     if String.length(raw) > 0 do
       cur_char = raw |> String.first()
-
       cond do
         # token separator
         cur_char === " " or cur_char === "\n" ->
@@ -98,7 +72,7 @@ defmodule Lexer do
 
           # check if there was nothing on the stack to consume
           if String.length(consumed) === 0 do
-            Util.error("Error, failed to consume item from stack.")
+            Util.error("failed to consume item from stack.")
           end
 
           # push the stack onto lexed
