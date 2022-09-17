@@ -8,6 +8,7 @@
     |________/ \______/  \______/ 
           LANGUAGE OF GODS                              
 
+![meme image](./image.jpg)
 # LOG
 
 log is a simple interpreted stack-based programming language written in elixir.
