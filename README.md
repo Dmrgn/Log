@@ -10,7 +10,7 @@
 
 # LOG
 
-log is an esoteric interpreted stack-based programming language.
+log is a simple interpreted stack-based programming language written in elixir.
 
 Here is the hello world program:
 ```log
@@ -18,10 +18,17 @@ vpush 'all your codebase are belong to us.'
 print
 ```
 
+```log
+vpush 9 10
+add
+print
+```
+
 ## Change LOG
 
 - ### v 0.2.4
   Parser supports the `print` command
+  
 - ### v 0.2.3
   Parser supports `add` and `sub` commands for addition and subtraction
 
